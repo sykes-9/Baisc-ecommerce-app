@@ -14,7 +14,7 @@ import { CartContext } from '../contexts/CartContext';
 
 const Sidebar = () => {
   const { isOpen, handleClose} = useContext(SidebarContext);
-  const { cart, clearCart } = useContext(CartContext);
+  const { cart, clearCart, total, itemAmount } = useContext(CartContext);
   return (
     <div className={`${isOpen ? 'right-0' : '-right-full'} w-full 
     bg-white fixed top-0 h-full
@@ -23,8 +23,9 @@ const Sidebar = () => {
      >
       <div className='flex items-center justify-between py-6
        border-b'>
-        <div className='uppercase text-sm 
-        font-semibold'>Shopping Bag(0)</div>
+        <div className='uppercase text-sm font-semibold'>
+            Shopping Bag ({itemAmount})
+        </div>
         {/* icon */}
         <div 
           onClick={handleClose} 
@@ -33,7 +34,8 @@ const Sidebar = () => {
           <IoMdArrowForward className='text-2xl' />
         </div>
       </div>
-       <div>
+       <div className='flex flex-col gap-y-2 h-[440px] lg:h-
+       [640px] overflow-y-auto overflow-x-hidden border-b'>
         {cart.map(item => {
          return <CartItem item={item} key={item.id} />;
         })}
@@ -44,8 +46,9 @@ const Sidebar = () => {
          items-center'>
           {/* total */}
           <div className='uppercase font-semibold'>
-            <span className='mr-2'>Total:</span>$ 1000
-          </div>
+            <span className='mr-2'>Total:</span>$ {parseFloat 
+            (total).toFixed(2)}
+            </div>
           {/* clear cart icon */}
           <div 
              onClick={clearCart} 
@@ -55,6 +58,20 @@ const Sidebar = () => {
             <FiTrash2 />
           </div>
         </div>
+        <Link 
+          to='/'
+          className='bg-gray-200 flex p-4 justify-center
+          items-center text-primary w-full font-medium'
+          >
+            View cart
+          </Link>
+        <Link
+          to='/'
+          className='bg-primary flex p-4 justify-center
+          items-center text-white w-full font-medium'
+          >
+            Checkout
+        </Link>
        </div>
       </div>
   );

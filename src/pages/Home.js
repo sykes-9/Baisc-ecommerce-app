@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 // import product context
 import { ProductContext } from '../contexts/ProductContext';
 // import components
-import Product from '../components/Product'
+import Product from '../components/Product';
+import Hero from '../components/Hero';
 
 const Home = () => {
   // get products from product context
@@ -15,7 +16,9 @@ const Home = () => {
     );
   });
 
-  return <div>
+  return (
+      <div>
+           <Hero />
            <section className='py-16'>
             <div className="container mx-auto">
               <div className='grid grid-cols-1 md:grid-cols-2 
@@ -27,7 +30,8 @@ const Home = () => {
               </div>
             </div>
            </section>
-         </div>;
+      </div>
+        );
 }; 
 
 export default Home;
